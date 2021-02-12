@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TextInput,Button, Alert } from 'react-native'
 import Texto from './Components/Primeiro'
 import X, {Comp2, Comp3} from './Components/Multi'
 import MinMax from './Components/MinMax'
@@ -9,18 +9,19 @@ class  Index extends Component{
     constructor(props){
         super(props);
         this.state = {
-            nome:''
+            nome:'',
+            input:''
         };
-        this.pegaNome = this.pegaNome.bind(this);  
+        this.entrar = this.entrar.bind(this);
     }
-    pegaNome(texto){
-        if(texto.length > 0){
-            this.setState({nome: 'Bem vindo: ' + texto})
-        }else{
-            this.setState({nome: ''})
+    entrar(){
+        if(this.state.input ===''){
+            alert('Digite seu nome !')
+            return;
         }
-       
+        this.setState({nome: 'BEM VINDO: ' + this.state.input})
     }
+    
     render(){
         return (
         <View style={style.App}>
@@ -28,7 +29,11 @@ class  Index extends Component{
             style={style.input}
             placeholder='DIGITE SEU NOME'
             underlineColorAndroid='transparent'
-            onChangeText={this.pegaNome}/>
+            onChangeText={(texto)=> this.setState({input: texto})}
+            />
+
+            <Button title='Entrar' onPress={this.entrar}/>
+
             <Text style={style.texto}>{this.state.nome}</Text>
            <Aleatorio min={5} max={15}/>
            {/*<MinMax min={1} max={94}/>
